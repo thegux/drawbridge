@@ -42,9 +42,8 @@ module drawbridge(has_car_c, i_clk, i_reset, i_carIn, i_carOut, i_boatClose, i_b
 				 Boat_c = 3'b010,
 				 Boat_c_Cars = 3'b011,
 				 Boat_h = 3'100,
-				 Alert_Boat_h_Cars = 3'b101,
 				 Boat_ch = 3'b110,
-				 Alert_Boat_ch_Cars = 3'b111,
+				 Alert = 3'b111,
 				 off = 0,
 				 on = 1;
 				 
@@ -58,9 +57,8 @@ module drawbridge(has_car_c, i_clk, i_reset, i_carIn, i_carOut, i_boatClose, i_b
 				3'b010: EstadoAtual <= Boat_c;
 				3'b011: EstadoAtual <= Boat_c_Cars;
 				3'b100: EstadoAtual <= Boat_h;
-				3'b101: EstadoAtual <= Alert_Boat_h_Cars;
 				3'b110: EstadoAtual <= Boat_ch;
-				3'b111: EstadoAtual <= Alert_Boat_ch_Cars;
+				3'b111: EstadoAtual <= Alert;
 				default: EstadoAtual <= Empty_Bridge;
 			endcase
 		else EstadoAtual <= EstadoFuturo;
@@ -76,7 +74,7 @@ module drawbridge(has_car_c, i_clk, i_reset, i_carIn, i_carOut, i_boatClose, i_b
 		case (EstadoAtual)
 			Empty_Bridge: case({i_boatHere, i_boatClose, has_car_c})
 						3'b000: begin
-									EstadoFuturo =  Cars;
+									EstadoFuturo =  Empty_Bridge;
 									o_carBarrier = off;
 									o_alert = off;
 									o_bridge_s = off;
@@ -87,12 +85,36 @@ module drawbridge(has_car_c, i_clk, i_reset, i_carIn, i_carOut, i_boatClose, i_b
 									o_alert = off;
 									o_bridge_s = off;
 								 end
-						3'b001: begin
+						3'b010: begin
+									EstadoFuturo =  Boat_c;
+									o_carBarrier = on;
+									o_alert = on;
+									o_bridge_s = off;
+								 end
+						3'b011: begin
+									EstadoFuturo =  Boat_c_Cars;
+									o_carBarrier = off;
+									o_alert = on;
+									o_bridge_s = off;
+								 end
+						3'b100: begin
+									EstadoFuturo =  Alert;
+									o_carBarrier = off;
+									o_alert = off;
+									o_bridge_s = off;
+								 end
+						3'b101: begin
 									EstadoFuturo =  Cars;
 									o_carBarrier = off;
 									o_alert = off;
 									o_bridge_s = off;
 								 end
+						3'b111: begin
+									EstadoFuturo =  Cars;
+									o_carBarrier = off;
+									o_alert = off;
+									o_bridge_s = off;
+								 end		 		 
 					 endcase
 			
 		endcase
