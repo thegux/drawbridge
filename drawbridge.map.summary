@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Sat Jun 25 20:04:54 2022
+Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
+Revision Name : drawbridge
+Top-level Entity Name : drawbridge
+Family : Cyclone IV E
+Total logic elements : 86
+    Total combinational functions : 86
+    Dedicated logic registers : 32
+Total registers : 32
+Total pins : 6
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

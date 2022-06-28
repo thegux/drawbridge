@@ -1,0 +1,22 @@
+/**
+	 General counter implemented as a module.
+*/
+
+module counters (clk, up_down, qd);
+
+   input   clk, up_down;
+   output  [7:0] qd;
+   reg     [7:0] qd;
+   integer direction;
+   
+	// An up/down counter
+   always @ (posedge clk) begin
+      if (up_down) begin
+         direction = 1;
+      end
+      else begin
+         direction = -1;
+      end
+      qd <= qd + direction;
+   end
+endmodule

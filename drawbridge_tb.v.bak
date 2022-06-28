@@ -1,0 +1,14 @@
+/**
+	DRAWBRIDGE TESTBENCH
+*/
+
+module drawridge_tb;
+	localparam period = 20;
+	reg i_clk, i_carIn, i_carOut, i_boat;
+	wire o_boat_s, o_alert_s, o_bar_s, o_car_c;
+	
+	drawbridge UUT (o_boat_s, o_alert_s, o_bar_s, o_car_c, i_clk, i_carIn, i_carOut, i_boat);
+	
+	
+	
+endmodule

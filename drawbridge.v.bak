@@ -1,0 +1,9 @@
+/**
+	This module is responsible for instantianting and intermediating
+	the logic for a drawbridge.
+	It is implemented using a behavioral coding structure of VHDL.
+*/
+module drawbridge()
+	
+
+endmodule
