@@ -86,22 +86,22 @@ module drawbridge(has_car_c, i_clk, i_reset, i_carIn, i_carOut, i_boatClose, i_b
 									o_bridge_s = off;
 								 end
 						3'b010: begin
-									EstadoFuturo =  Boat_c;
+									EstadoFuturo =  Alert;
 									o_carBarrier = on;
 									o_alert = on;
 									o_bridge_s = off;
 								 end
 						3'b011: begin
-									EstadoFuturo =  Boat_c_Cars;
+									EstadoFuturo =  Alert;
 									o_carBarrier = off;
 									o_alert = on;
 									o_bridge_s = off;
 								 end
 						3'b100: begin
 									EstadoFuturo =  Alert;
-									o_carBarrier = off;
-									o_alert = off;
-									o_bridge_s = off;
+									o_carBarrier = on;
+									o_alert = on;
+									o_bridge_s = on;
 								 end
 						3'b101: begin
 									EstadoFuturo =  Cars;
