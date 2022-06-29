@@ -51,14 +51,14 @@ module drawbridge(has_car_c, i_clk, i_reset, i_carIn, i_carOut, i_boatClose, i_b
 	// atualização do estado e reset
 	always @ (posedge i_clk) begin
 		if (!i_reset) 
-			case({i_boatHere, i_boatClose, has_car_c})
-				3'b000: EstadoAtual <= Empty_Bridge;
-				3'b001: EstadoAtual <= Cars;
-				3'b010: EstadoAtual <= Boat_c;
-				3'b011: EstadoAtual <= Boat_c_Cars;
-				3'b100: EstadoAtual <= Boat_h;
-				3'b110: EstadoAtual <= Boat_ch;
-				3'b111: EstadoAtual <= Alert;
+			case({i_boatHere, i_boatClose, has_car_c})//os FSM s�o de acordo com o desenho de gab
+				3'b000: EstadoAtual <= Empty_Bridge;//fsm: vazio
+				3'b001: EstadoAtual <= Cars;//fsm: carro
+				3'b010: EstadoAtual <= Boat_c;//fsm: navio perto sem carro
+				3'b011: EstadoAtual <= Boat_c_Cars;//fsm: navio perto + carro
+				3'b100: EstadoAtual <= Boat_h;// fsm: navio passando
+				3'b110: EstadoAtual <= Boat_ch;//fsm: navio passando + carro perto
+				3'b111: EstadoAtual <= Alert;//fsm: alerta
 				default: EstadoAtual <= Empty_Bridge;
 			endcase
 		else EstadoAtual <= EstadoFuturo;
@@ -120,49 +120,49 @@ module drawbridge(has_car_c, i_clk, i_reset, i_carIn, i_carOut, i_boatClose, i_b
 		endcase
 			Boat_c_Cars: case({i_boatHere, i_boatClose, has_car_c})
 						3'b000: begin
-									EstadoFuturo =  Empty_Bridge;
+									EstadoFuturo =  Empty_Bridge; 
 									o_carBarrier = off;
 									o_alert = off;
 									o_bridge_s = off;
 								 end
 						3'b001: begin
-									EstadoFuturo =  Cars;
+									EstadoFuturo =  Empty_Bridge;
 									o_carBarrier = off;
 									o_alert = off;
 									o_bridge_s = off;
 								 end
-						3'b010: begin
+						3'b010: begin 
 									EstadoFuturo =  Boat_c;
-									o_carBarrier = on;
+									o_carBarrier = off;
 									o_alert = on;
 									o_bridge_s = off;
 								 end
 						3'b011: begin
-									EstadoFuturo =  Boat_c_Cars;
-									o_carBarrier = off;
-									o_alert = on;
+									EstadoFuturo =  Boat_h;
+									o_carBarrier = on;
+									o_alert = off;
 									o_bridge_s = off;
 								 end
 						3'b100: begin
-									EstadoFuturo =  Alert;
+									EstadoFuturo =  Boat_h;
 									o_carBarrier = off;
-									o_alert = off;
-									o_bridge_s = off;
+									o_alert = on;
+									o_bridge_s = on;
 								 end
 						3'b101: begin
-									EstadoFuturo =  Cars;
-									o_carBarrier = off;
-									o_alert = off;
-									o_bridge_s = off;
+									EstadoFuturo =  Boat_ch;
+									o_carBarrier = on;
+									o_alert = on;
+									o_bridge_s = on;
 								 end
 						3'b111: begin
-									EstadoFuturo =  Cars;
-									o_carBarrier = off;
-									o_alert = off;
-									o_bridge_s = off;
+									EstadoFuturo =  Boat_ch;
+									o_carBarrier = on;
+									o_alert = on;
+									o_bridge_s = on;
 								 end		 		 
 					 endcase
-			
+
 		endcase
 			Boat_h: case({i_boatHere, i_boatClose, has_car_c})
 						3'b000: begin
@@ -172,7 +172,7 @@ module drawbridge(has_car_c, i_clk, i_reset, i_carIn, i_carOut, i_boatClose, i_b
 									o_bridge_s = off;
 								 end
 						3'b001: begin
-									EstadoFuturo =  Cars;
+									EstadoFuturo =  Empty_Bridge;
 									o_carBarrier = off;
 									o_alert = off;
 									o_bridge_s = off;
@@ -180,32 +180,32 @@ module drawbridge(has_car_c, i_clk, i_reset, i_carIn, i_carOut, i_boatClose, i_b
 						3'b010: begin
 									EstadoFuturo =  Boat_c;
 									o_carBarrier = on;
-									o_alert = on;
-									o_bridge_s = off;
+									o_alert = off;
+									o_bridge_s = on;
 								 end
 						3'b011: begin
 									EstadoFuturo =  Boat_c_Cars;
-									o_carBarrier = off;
-									o_alert = on;
+									o_carBarrier = on;
+									o_alert = off;
 									o_bridge_s = off;
 								 end
 						3'b100: begin
 									EstadoFuturo =  Alert;
-									o_carBarrier = off;
+									o_carBarrier = on;
 									o_alert = off;
-									o_bridge_s = off;
+									o_bridge_s = on;
 								 end
 						3'b101: begin
-									EstadoFuturo =  Cars;
-									o_carBarrier = off;
-									o_alert = off;
-									o_bridge_s = off;
+									EstadoFuturo =  Boat_ch;
+									o_carBarrier = on;
+									o_alert = on;
+									o_bridge_s = on;
 								 end
 						3'b111: begin
-									EstadoFuturo =  Cars;
-									o_carBarrier = off;
-									o_alert = off;
-									o_bridge_s = off;
+									EstadoFuturo =  Alert;
+									o_carBarrier = on;
+									o_alert = on;
+									o_bridge_s = on;
 								 end		 		 
 					 endcase
 			
@@ -218,40 +218,40 @@ module drawbridge(has_car_c, i_clk, i_reset, i_carIn, i_carOut, i_boatClose, i_b
 									o_bridge_s = off;
 								 end
 						3'b001: begin
-									EstadoFuturo =  Cars;
+									EstadoFuturo =  Empty_Bridge;
 									o_carBarrier = off;
 									o_alert = off;
 									o_bridge_s = off;
 								 end
 						3'b010: begin
 									EstadoFuturo =  Boat_c;
-									o_carBarrier = on;
-									o_alert = on;
+									o_carBarrier = off;
+									o_alert = off;
 									o_bridge_s = off;
 								 end
 						3'b011: begin
 									EstadoFuturo =  Boat_c_Cars;
-									o_carBarrier = off;
-									o_alert = on;
+									o_carBarrier = on;
+									o_alert = off;
 									o_bridge_s = off;
 								 end
 						3'b100: begin
-									EstadoFuturo =  Alert;
-									o_carBarrier = off;
+									EstadoFuturo =  Boat_h;
+									o_carBarrier = on;
 									o_alert = off;
-									o_bridge_s = off;
+									o_bridge_s = on;
 								 end
 						3'b101: begin
-									EstadoFuturo =  Cars;
-									o_carBarrier = off;
-									o_alert = off;
-									o_bridge_s = off;
+									EstadoFuturo =  Alert;
+									o_carBarrier = on;
+									o_alert = on;
+									o_bridge_s = on;
 								 end
 						3'b111: begin
-									EstadoFuturo =  Cars;
-									o_carBarrier = off;
-									o_alert = off;
-									o_bridge_s = off;
+									EstadoFuturo =  Alert;
+									o_carBarrier = on;
+									o_alert = on;
+									o_bridge_s = on;
 								 end		 		 
 					 endcase
 			
