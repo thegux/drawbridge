@@ -1,5 +1,5 @@
 Analysis & Synthesis report for drawbridge
-Sat Jul  2 13:38:50 2022
+Sat Jul  2 16:19:01 2022
 Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
@@ -21,7 +21,6 @@ Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
  13. Post-Synthesis Netlist Statistics for Top Partition
  14. Elapsed Time Per Partition
  15. Analysis & Synthesis Messages
- 16. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -48,7 +47,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Jul  2 13:38:50 2022       ;
+; Analysis & Synthesis Status        ; Successful - Sat Jul  2 16:19:01 2022       ;
 ; Quartus Prime Version              ; 21.1.0 Build 842 10/21/2021 SJ Lite Edition ;
 ; Revision Name                      ; drawbridge                                  ;
 ; Top-level Entity Name              ; drawbridge                                  ;
@@ -177,36 +176,36 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------+---------+
 
 
-+-------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                 ;
-+---------------------------------------------+---------------+
-; Resource                                    ; Usage         ;
-+---------------------------------------------+---------------+
-; Estimated Total logic elements              ; 124           ;
-;                                             ;               ;
-; Total combinational functions               ; 124           ;
-; Logic element usage by number of LUT inputs ;               ;
-;     -- 4 input functions                    ; 45            ;
-;     -- 3 input functions                    ; 40            ;
-;     -- <=2 input functions                  ; 39            ;
-;                                             ;               ;
-; Logic elements by mode                      ;               ;
-;     -- normal mode                          ; 62            ;
-;     -- arithmetic mode                      ; 62            ;
-;                                             ;               ;
-; Total registers                             ; 39            ;
-;     -- Dedicated logic registers            ; 39            ;
-;     -- I/O registers                        ; 0             ;
-;                                             ;               ;
-; I/O pins                                    ; 13            ;
-;                                             ;               ;
-; Embedded Multiplier 9-bit elements          ; 0             ;
-;                                             ;               ;
-; Maximum fan-out node                        ; i_reset~input ;
-; Maximum fan-out                             ; 40            ;
-; Total fan-out                               ; 507           ;
-; Average fan-out                             ; 2.68          ;
-+---------------------------------------------+---------------+
++-----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary               ;
++---------------------------------------------+-------------+
+; Resource                                    ; Usage       ;
++---------------------------------------------+-------------+
+; Estimated Total logic elements              ; 124         ;
+;                                             ;             ;
+; Total combinational functions               ; 124         ;
+; Logic element usage by number of LUT inputs ;             ;
+;     -- 4 input functions                    ; 44          ;
+;     -- 3 input functions                    ; 44          ;
+;     -- <=2 input functions                  ; 36          ;
+;                                             ;             ;
+; Logic elements by mode                      ;             ;
+;     -- normal mode                          ; 62          ;
+;     -- arithmetic mode                      ; 62          ;
+;                                             ;             ;
+; Total registers                             ; 39          ;
+;     -- Dedicated logic registers            ; 39          ;
+;     -- I/O registers                        ; 0           ;
+;                                             ;             ;
+; I/O pins                                    ; 13          ;
+;                                             ;             ;
+; Embedded Multiplier 9-bit elements          ; 0           ;
+;                                             ;             ;
+; Maximum fan-out node                        ; i_clk~input ;
+; Maximum fan-out                             ; 39          ;
+; Total fan-out                               ; 509         ;
+; Average fan-out                             ; 2.69        ;
++---------------------------------------------+-------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -268,7 +267,7 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------+
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |drawbridge|countTrue:ct|count[23] ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |drawbridge|countTrue:ct|count[29] ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------+
 
 
@@ -305,12 +304,12 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;         3 data inputs ; 32                          ;
 ;     normal            ; 63                          ;
 ;         1 data inputs ; 2                           ;
-;         2 data inputs ; 8                           ;
-;         3 data inputs ; 8                           ;
-;         4 data inputs ; 45                          ;
+;         2 data inputs ; 5                           ;
+;         3 data inputs ; 12                          ;
+;         4 data inputs ; 44                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 11.60                       ;
-; Average LUT depth     ; 9.21                        ;
+; Average LUT depth     ; 9.25                        ;
 +-----------------------+-----------------------------+
 
 
@@ -329,7 +328,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
-    Info: Processing started: Sat Jul  2 13:38:42 2022
+    Info: Processing started: Sat Jul  2 16:18:53 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off drawbridge -c drawbridge
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -339,8 +338,6 @@ Warning (10227): Verilog HDL Port Declaration warning at drawbridge.v(34): data 
 Info (10499): HDL info at drawbridge.v(31): see declaration for object "machine_state" File: C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.v Line: 31
 Info (12127): Elaborating entity "drawbridge" for the top level hierarchy
 Warning (10270): Verilog HDL Case Statement warning at drawbridge.v(228): incomplete case statement has no default case item File: C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.v Line: 228
-Warning (10270): Verilog HDL Case Statement warning at drawbridge.v(75): incomplete case statement has no default case item File: C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.v Line: 75
-Info (10264): Verilog HDL Case Statement information at drawbridge.v(75): all case item expressions in this case statement are onehot File: C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.v Line: 75
 Warning (12125): Using design file counttrue.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
     Info (12023): Found entity 1: countTrue File: C:/Users/gabir/Desktop/Faculdade/drawbridge/counttrue.v Line: 1
 Info (12128): Elaborating entity "countTrue" for hierarchy "countTrue:ct" File: C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.v Line: 37
@@ -349,21 +346,14 @@ Info (286030): Timing-Driven Synthesis is running
 Info (17049): 3 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 137 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 138 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 6 input pins
     Info (21059): Implemented 7 output pins
-    Info (21061): Implemented 124 logic cells
-Info (144001): Generated suppressed messages file C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.map.smsg
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 7 warnings
-    Info: Peak virtual memory: 4777 megabytes
-    Info: Processing ended: Sat Jul  2 13:38:50 2022
+    Info (21061): Implemented 125 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
+    Info: Peak virtual memory: 4774 megabytes
+    Info: Processing ended: Sat Jul  2 16:19:01 2022
     Info: Elapsed time: 00:00:08
-    Info: Total CPU time (on all processors): 00:00:20
-
-
-+------------------------------------------+
-; Analysis & Synthesis Suppressed Messages ;
-+------------------------------------------+
-The suppressed messages can be found in C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.map.smsg.
+    Info: Total CPU time (on all processors): 00:00:18
 
 
