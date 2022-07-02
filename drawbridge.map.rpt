@@ -1,5 +1,5 @@
 Analysis & Synthesis report for drawbridge
-Sat Jun 25 20:04:54 2022
+Sat Jul  2 13:38:50 2022
 Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
@@ -13,12 +13,15 @@ Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. General Register Statistics
-  9. Multiplexer Restructuring Statistics (Restructuring Performed)
- 10. Post-Synthesis Netlist Statistics for Top Partition
- 11. Elapsed Time Per Partition
- 12. Analysis & Synthesis Messages
- 13. Analysis & Synthesis Suppressed Messages
+  8. State Machine - |drawbridge|EstadoAtual
+  9. Registers Removed During Synthesis
+ 10. General Register Statistics
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Parameter Settings for User Entity Instance: Top-level Entity: |drawbridge
+ 13. Post-Synthesis Netlist Statistics for Top Partition
+ 14. Elapsed Time Per Partition
+ 15. Analysis & Synthesis Messages
+ 16. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -45,16 +48,16 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Jun 25 20:04:54 2022       ;
+; Analysis & Synthesis Status        ; Successful - Sat Jul  2 13:38:50 2022       ;
 ; Quartus Prime Version              ; 21.1.0 Build 842 10/21/2021 SJ Lite Edition ;
 ; Revision Name                      ; drawbridge                                  ;
 ; Top-level Entity Name              ; drawbridge                                  ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 86                                          ;
-;     Total combinational functions  ; 86                                          ;
-;     Dedicated logic registers      ; 32                                          ;
-; Total registers                    ; 32                                          ;
-; Total pins                         ; 6                                           ;
+; Total logic elements               ; 124                                         ;
+;     Total combinational functions  ; 124                                         ;
+;     Dedicated logic registers      ; 39                                          ;
+; Total registers                    ; 39                                          ;
+; Total pins                         ; 13                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
@@ -174,36 +177,36 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------+---------+
 
 
-+----------------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                          ;
-+---------------------------------------------+------------------------+
-; Resource                                    ; Usage                  ;
-+---------------------------------------------+------------------------+
-; Estimated Total logic elements              ; 86                     ;
-;                                             ;                        ;
-; Total combinational functions               ; 86                     ;
-; Logic element usage by number of LUT inputs ;                        ;
-;     -- 4 input functions                    ; 20                     ;
-;     -- 3 input functions                    ; 33                     ;
-;     -- <=2 input functions                  ; 33                     ;
-;                                             ;                        ;
-; Logic elements by mode                      ;                        ;
-;     -- normal mode                          ; 24                     ;
-;     -- arithmetic mode                      ; 62                     ;
-;                                             ;                        ;
-; Total registers                             ; 32                     ;
-;     -- Dedicated logic registers            ; 32                     ;
-;     -- I/O registers                        ; 0                      ;
-;                                             ;                        ;
-; I/O pins                                    ; 6                      ;
-;                                             ;                        ;
-; Embedded Multiplier 9-bit elements          ; 0                      ;
-;                                             ;                        ;
-; Maximum fan-out node                        ; countTrue:ct|always0~4 ;
-; Maximum fan-out                             ; 32                     ;
-; Total fan-out                               ; 347                    ;
-; Average fan-out                             ; 2.67                   ;
-+---------------------------------------------+------------------------+
++-------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                 ;
++---------------------------------------------+---------------+
+; Resource                                    ; Usage         ;
++---------------------------------------------+---------------+
+; Estimated Total logic elements              ; 124           ;
+;                                             ;               ;
+; Total combinational functions               ; 124           ;
+; Logic element usage by number of LUT inputs ;               ;
+;     -- 4 input functions                    ; 45            ;
+;     -- 3 input functions                    ; 40            ;
+;     -- <=2 input functions                  ; 39            ;
+;                                             ;               ;
+; Logic elements by mode                      ;               ;
+;     -- normal mode                          ; 62            ;
+;     -- arithmetic mode                      ; 62            ;
+;                                             ;               ;
+; Total registers                             ; 39            ;
+;     -- Dedicated logic registers            ; 39            ;
+;     -- I/O registers                        ; 0             ;
+;                                             ;               ;
+; I/O pins                                    ; 13            ;
+;                                             ;               ;
+; Embedded Multiplier 9-bit elements          ; 0             ;
+;                                             ;               ;
+; Maximum fan-out node                        ; i_reset~input ;
+; Maximum fan-out                             ; 40            ;
+; Total fan-out                               ; 507           ;
+; Average fan-out                             ; 2.68          ;
++---------------------------------------------+---------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -211,10 +214,38 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------+-------------+--------------+
 ; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name      ; Entity Name ; Library Name ;
 +----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------+-------------+--------------+
-; |drawbridge                ; 86 (0)              ; 32 (0)                    ; 0           ; 0            ; 0       ; 0         ; 6    ; 0            ; |drawbridge              ; drawbridge  ; work         ;
+; |drawbridge                ; 124 (38)            ; 39 (7)                    ; 0           ; 0            ; 0       ; 0         ; 13   ; 0            ; |drawbridge              ; drawbridge  ; work         ;
 ;    |countTrue:ct|          ; 86 (86)             ; 32 (32)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |drawbridge|countTrue:ct ; countTrue   ; work         ;
 +----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |drawbridge|EstadoAtual                                                                                                                                              ;
++--------------------------+-------------------+---------------------+--------------------+-------------------------+--------------------+------------------+--------------------------+
+; Name                     ; EstadoAtual.Alert ; EstadoAtual.Boat_ch ; EstadoAtual.Boat_h ; EstadoAtual.Boat_c_Cars ; EstadoAtual.Boat_c ; EstadoAtual.Cars ; EstadoAtual.Empty_Bridge ;
++--------------------------+-------------------+---------------------+--------------------+-------------------------+--------------------+------------------+--------------------------+
+; EstadoAtual.Empty_Bridge ; 0                 ; 0                   ; 0                  ; 0                       ; 0                  ; 0                ; 0                        ;
+; EstadoAtual.Cars         ; 0                 ; 0                   ; 0                  ; 0                       ; 0                  ; 1                ; 1                        ;
+; EstadoAtual.Boat_c       ; 0                 ; 0                   ; 0                  ; 0                       ; 1                  ; 0                ; 1                        ;
+; EstadoAtual.Boat_c_Cars  ; 0                 ; 0                   ; 0                  ; 1                       ; 0                  ; 0                ; 1                        ;
+; EstadoAtual.Boat_h       ; 0                 ; 0                   ; 1                  ; 0                       ; 0                  ; 0                ; 1                        ;
+; EstadoAtual.Boat_ch      ; 0                 ; 1                   ; 0                  ; 0                       ; 0                  ; 0                ; 1                        ;
+; EstadoAtual.Alert        ; 1                 ; 0                   ; 0                  ; 0                       ; 0                  ; 0                ; 1                        ;
++--------------------------+-------------------+---------------------+--------------------+-------------------------+--------------------+------------------+--------------------------+
+
+
++------------------------------------------------------------+
+; Registers Removed During Synthesis                         ;
++---------------------------------------+--------------------+
+; Register name                         ; Reason for Removal ;
++---------------------------------------+--------------------+
+; EstadoAtual~2                         ; Lost fanout        ;
+; EstadoAtual~3                         ; Lost fanout        ;
+; EstadoAtual~4                         ; Lost fanout        ;
+; Total Number of Removed Registers = 3 ;                    ;
++---------------------------------------+--------------------+
 
 
 +------------------------------------------------------+
@@ -222,7 +253,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 32    ;
+; Total registers                              ; 39    ;
 ; Number of registers using Synchronous Clear  ; 32    ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
@@ -237,8 +268,26 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------+
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |drawbridge|countTrue:ct|count[31] ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |drawbridge|countTrue:ct|count[23] ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------+
+
+
++----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |drawbridge ;
++----------------+-------+---------------------------------------------------+
+; Parameter Name ; Value ; Type                                              ;
++----------------+-------+---------------------------------------------------+
+; Empty_Bridge   ; 000   ; Unsigned Binary                                   ;
+; Cars           ; 001   ; Unsigned Binary                                   ;
+; Boat_c         ; 010   ; Unsigned Binary                                   ;
+; Boat_c_Cars    ; 011   ; Unsigned Binary                                   ;
+; Boat_h         ; 100   ; Unsigned Binary                                   ;
+; Boat_ch        ; 110   ; Unsigned Binary                                   ;
+; Alert          ; 111   ; Unsigned Binary                                   ;
+; off            ; 0     ; Unsigned Binary                                   ;
+; on             ; 1     ; Unsigned Binary                                   ;
++----------------+-------+---------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
 +-----------------------------------------------------+
@@ -246,21 +295,22 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 6                           ;
-; cycloneiii_ff         ; 32                          ;
+; boundary_port         ; 13                          ;
+; cycloneiii_ff         ; 39                          ;
 ;     SCLR              ; 32                          ;
-; cycloneiii_lcell_comb ; 86                          ;
+;     plain             ; 7                           ;
+; cycloneiii_lcell_comb ; 125                         ;
 ;     arith             ; 62                          ;
 ;         2 data inputs ; 30                          ;
 ;         3 data inputs ; 32                          ;
-;     normal            ; 24                          ;
-;         1 data inputs ; 1                           ;
-;         2 data inputs ; 2                           ;
-;         3 data inputs ; 1                           ;
-;         4 data inputs ; 20                          ;
+;     normal            ; 63                          ;
+;         1 data inputs ; 2                           ;
+;         2 data inputs ; 8                           ;
+;         3 data inputs ; 8                           ;
+;         4 data inputs ; 45                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 10.60                       ;
-; Average LUT depth     ; 9.25                        ;
+; Max LUT depth         ; 11.60                       ;
+; Average LUT depth     ; 9.21                        ;
 +-----------------------+-----------------------------+
 
 
@@ -279,32 +329,36 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
-    Info: Processing started: Sat Jun 25 20:04:48 2022
+    Info: Processing started: Sat Jul  2 13:38:42 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off drawbridge -c drawbridge
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Warning (12125): Using design file drawbridge.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
-    Info (12023): Found entity 1: drawbridge File: C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.v Line: 21
+    Info (12023): Found entity 1: drawbridge File: C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.v Line: 28
+Warning (10227): Verilog HDL Port Declaration warning at drawbridge.v(34): data type declaration for "machine_state" declares packed dimensions but the port declaration declaration does not File: C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.v Line: 34
+Info (10499): HDL info at drawbridge.v(31): see declaration for object "machine_state" File: C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.v Line: 31
 Info (12127): Elaborating entity "drawbridge" for the top level hierarchy
+Warning (10270): Verilog HDL Case Statement warning at drawbridge.v(228): incomplete case statement has no default case item File: C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.v Line: 228
+Warning (10270): Verilog HDL Case Statement warning at drawbridge.v(75): incomplete case statement has no default case item File: C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.v Line: 75
+Info (10264): Verilog HDL Case Statement information at drawbridge.v(75): all case item expressions in this case statement are onehot File: C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.v Line: 75
 Warning (12125): Using design file counttrue.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
     Info (12023): Found entity 1: countTrue File: C:/Users/gabir/Desktop/Faculdade/drawbridge/counttrue.v Line: 1
-Info (12128): Elaborating entity "countTrue" for hierarchy "countTrue:ct" File: C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.v Line: 27
+Info (12128): Elaborating entity "countTrue" for hierarchy "countTrue:ct" File: C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.v Line: 37
 Warning (10230): Verilog HDL assignment warning at counttrue.v(23): truncated value with size 32 to match size of target (1) File: C:/Users/gabir/Desktop/Faculdade/drawbridge/counttrue.v Line: 23
 Info (286030): Timing-Driven Synthesis is running
-Info (144001): Generated suppressed messages file C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.map.smsg
+Info (17049): 3 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 1 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "i_boat" File: C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.v Line: 23
-Info (21057): Implemented 92 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 5 input pins
-    Info (21059): Implemented 1 output pins
-    Info (21061): Implemented 86 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
+Info (21057): Implemented 137 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 6 input pins
+    Info (21059): Implemented 7 output pins
+    Info (21061): Implemented 124 logic cells
+Info (144001): Generated suppressed messages file C:/Users/gabir/Desktop/Faculdade/drawbridge/drawbridge.map.smsg
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 7 warnings
     Info: Peak virtual memory: 4777 megabytes
-    Info: Processing ended: Sat Jun 25 20:04:54 2022
-    Info: Elapsed time: 00:00:06
-    Info: Total CPU time (on all processors): 00:00:14
+    Info: Processing ended: Sat Jul  2 13:38:50 2022
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:20
 
 
 +------------------------------------------+

@@ -70,7 +70,7 @@ CHIP  "drawbridge"  ASSIGNED TO AN: EP4CE6E22C6
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
 -------------------------------------------------------------------------------------------------------------
 RESERVED_INPUT_WITH_WEAK_PULLUP : 1         :        :                   :         : 1         :                
-i_carOut                     : 2         : input  : 2.5 V             :         : 1         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 2         :        :                   :         : 1         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 3         :        :                   :         : 1         :                
 GND                          : 4         : gnd    :                   :         :           :                
 VCCINT                       : 5         : power  :                   : 1.2V    :           :                
@@ -78,8 +78,8 @@ VCCINT                       : 5         : power  :                   : 1.2V    
 RESERVED_INPUT_WITH_WEAK_PULLUP : 7         :        :                   :         : 1         :                
 ~ALTERA_FLASH_nCE_nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 8         : input  : 2.5 V             :         : 1         : N              
 nSTATUS                      : 9         :        :                   :         : 1         :                
-i_reset                      : 10        : input  : 2.5 V             :         : 1         : N              
-has_car_c                    : 11        : output : 2.5 V             :         : 1         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 10        :        :                   :         : 1         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 11        :        :                   :         : 1         :                
 ~ALTERA_DCLK~                : 12        : output : 2.5 V             :         : 1         : N              
 ~ALTERA_DATA0~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 13        : input  : 2.5 V             :         : 1         : N              
 nCONFIG                      : 14        :        :                   :         : 1         :                
@@ -166,36 +166,36 @@ MSEL0                        : 94        :        :                   :         
 GND                          : 95        : gnd    :                   :         :           :                
 MSEL1                        : 96        :        :                   :         : 6         :                
 MSEL2                        : 97        :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 98        :        :                   :         : 6         :                
+has_car_c                    : 98        : output : 2.5 V             :         : 6         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : 99        :        :                   :         : 6         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 100       :        :                   :         : 6         :                
 ~ALTERA_nCEO~ / RESERVED_OUTPUT_OPEN_DRAIN : 101       : output : 2.5 V             :         : 6         : N              
 VCCINT                       : 102       : power  :                   : 1.2V    :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 103       :        :                   :         : 6         :                
+i_reset                      : 103       : input  : 2.5 V             :         : 6         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : 104       :        :                   :         : 6         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 105       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 106       :        :                   :         : 6         :                
+o_alert                      : 106       : output : 2.5 V             :         : 6         : N              
 VCCA2                        : 107       : power  :                   : 2.5V    :           :                
 GNDA2                        : 108       : gnd    :                   :         :           :                
 VCCD_PLL2                    : 109       : power  :                   : 1.2V    :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 110       :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 111       :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 112       :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 113       :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 114       :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 115       :        :                   :         : 7         :                
+i_boatClose                  : 110       : input  : 2.5 V             :         : 7         : N              
+o_bridge_s                   : 111       : output : 2.5 V             :         : 7         : N              
+i_boatHere                   : 112       : input  : 2.5 V             :         : 7         : N              
+machine_state[2]             : 113       : output : 2.5 V             :         : 7         : N              
+machine_state[0]             : 114       : output : 2.5 V             :         : 7         : N              
+o_carBarrier                 : 115       : output : 2.5 V             :         : 7         : N              
 VCCINT                       : 116       : power  :                   : 1.2V    :           :                
 VCCIO7                       : 117       : power  :                   : 2.5V    : 7         :                
 GND                          : 118       : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 119       :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 120       :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 121       :        :                   :         : 7         :                
+i_carOut                     : 119       : input  : 2.5 V             :         : 7         : N              
+i_carIn                      : 120       : input  : 2.5 V             :         : 7         : N              
+machine_state[1]             : 121       : output : 2.5 V             :         : 7         : N              
 VCCIO7                       : 122       : power  :                   : 2.5V    : 7         :                
 GND                          : 123       : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 124       :        :                   :         : 7         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 125       :        :                   :         : 7         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 126       :        :                   :         : 7         :                
-i_boat                       : 127       : input  : 2.5 V             :         : 7         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 127       :        :                   :         : 7         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 128       :        :                   :         : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 129       :        :                   :         : 8         :                
 VCCIO8                       : 130       : power  :                   : 2.5V    : 8         :                
@@ -211,6 +211,6 @@ VCCIO8                       : 139       : power  :                   : 2.5V    
 GND                          : 140       : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 141       :        :                   :         : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 142       :        :                   :         : 8         :                
-i_carIn                      : 143       : input  : 2.5 V             :         : 8         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 143       :        :                   :         : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 144       :        :                   :         : 8         :                
 GND                          : EPAD      :        :                   :         :           :                

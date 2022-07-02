@@ -25,12 +25,13 @@
 	--------------------------------
 */
 
-module drawbridge(has_car_c, i_clk, i_reset, i_carIn, i_carOut, i_boatClose, i_boatHere, o_carBarrier, o_alert, o_bridge_s);
+module drawbridge(has_car_c, i_clk, i_reset, i_carIn, i_carOut, i_boatClose, i_boatHere, o_carBarrier, o_alert, o_bridge_s, machine_state);
 
-	input  i_carIn, i_carOut, i_boat, i_clk, i_reset, i_boatClose, i_boatHere;
-	output has_car_c, o_carBarrier, o_alert, o_bridge_s;
+	input  i_carIn, i_carOut, i_clk, i_reset, i_boatClose, i_boatHere;
+	output has_car_c, o_carBarrier, o_alert, o_bridge_s, machine_state;
 	
-	reg [2:0] EstadoAtual, EstadoFuturo;
+	reg o_carBarrier, o_alert, o_bridge_s;
+	reg [2:0] EstadoAtual, EstadoFuturo, machine_state;
 		
 	//used to count and verify if there are cars on the bridge
 	countTrue ct (.clk(i_clk), .reset(i_reset), .up(i_carIn), .down(i_carOut), .hasItem(has_car_c));
@@ -41,12 +42,11 @@ module drawbridge(has_car_c, i_clk, i_reset, i_carIn, i_carOut, i_boatClose, i_b
 				 Cars = 3'b001,
 				 Boat_c = 3'b010,
 				 Boat_c_Cars = 3'b011,
-				 Boat_h = 3'100,
-				 Alert_Boat_h_Cars = 3'b101,
+				 Boat_h = 3'b100,
 				 Boat_ch = 3'b110,
-				 Alert_Boat_ch_Cars = 3'b111,
-				 off = 0,
-				 on = 1;
+				 Alert = 3'b111,
+				 off = 1'b0,
+				 on = 1'b1;
 				 
 	
 	// atualização do estado e reset
@@ -58,9 +58,8 @@ module drawbridge(has_car_c, i_clk, i_reset, i_carIn, i_carOut, i_boatClose, i_b
 				3'b010: EstadoAtual <= Boat_c;
 				3'b011: EstadoAtual <= Boat_c_Cars;
 				3'b100: EstadoAtual <= Boat_h;
-				3'b101: EstadoAtual <= Alert_Boat_h_Cars;
+				3'b111: EstadoAtual <= Alert;
 				3'b110: EstadoAtual <= Boat_ch;
-				3'b111: EstadoAtual <= Alert_Boat_ch_Cars;
 				default: EstadoAtual <= Empty_Bridge;
 			endcase
 		else EstadoAtual <= EstadoFuturo;
@@ -75,11 +74,257 @@ module drawbridge(has_car_c, i_clk, i_reset, i_carIn, i_carOut, i_boatClose, i_b
 		
 		case (EstadoAtual)
 			Empty_Bridge: case({i_boatHere, i_boatClose, has_car_c})
+					3'b000: begin
+								EstadoFuturo = Empty_Bridge;
+								o_carBarrier = off;
+								o_alert = off;
+								o_bridge_s = off;
+							 end
+					3'b001: begin
+								EstadoFuturo =  Cars;
+								o_carBarrier = off;
+								o_alert = off;
+								o_bridge_s = off;
+							 end
+					3'b010: begin
+								EstadoFuturo =  Boat_c;
+								o_carBarrier = on;
+								o_alert = off;
+								o_bridge_s = on;
+							 end
+					3'b011: begin
+								EstadoFuturo =  Boat_c_Cars;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = off;
+							 end
+					3'b100: begin
+								EstadoFuturo =  Alert;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = on;
+							 end
+					3'b101: begin
+								EstadoFuturo =  Alert;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = on;
+							 end
+					3'b110: begin
+								EstadoFuturo =  Alert;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = on;
+							 end
+					3'b111: begin
+								EstadoFuturo =  Alert;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = on;
+							 end		 		 
+				 endcase
+		
+			Cars: case({i_boatHere, i_boatClose, has_car_c})
+					3'b000: begin
+								EstadoFuturo =  Empty_Bridge;
+								o_carBarrier = off;
+								o_alert = off;
+								o_bridge_s = off;
+							 end
+					3'b001: begin
+								EstadoFuturo =  Cars;
+								o_carBarrier = off;
+								o_alert = off;
+								o_bridge_s = off;
+							 end
+					3'b010: begin
+								EstadoFuturo =  Boat_c;
+								o_carBarrier = on;
+								o_alert = off;
+								o_bridge_s = off;
+							 end
+					3'b011: begin
+								EstadoFuturo =  Boat_c_Cars;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = off;
+							 end
+					3'b100: begin
+								EstadoFuturo =  Alert;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = on;
+							 end
+					3'b101: begin
+								EstadoFuturo =  Alert;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = on;
+							 end
+					3'b110: begin
+								EstadoFuturo = Alert;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = on;
+							 end
+					3'b111: begin
+								EstadoFuturo =  Alert;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = on;
+							 end		 		 
+				 endcase
+		
+			Boat_c: case({i_boatHere, i_boatClose, has_car_c})
+					3'b000: begin
+								EstadoFuturo =  Empty_Bridge;
+								o_carBarrier = off;
+								o_alert = off;
+								o_bridge_s = off;
+							 end
+					3'b001: begin
+								EstadoFuturo =  Cars;
+								o_carBarrier = off;
+								o_alert = off;
+								o_bridge_s = off;
+							 end
+					3'b010: begin
+								EstadoFuturo =  Boat_c;
+								o_carBarrier = on;
+								o_alert = off;
+								o_bridge_s = on;
+							 end
+					3'b011: begin
+								EstadoFuturo =  Boat_c_Cars;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = off;
+							 end
+					3'b100: begin
+								EstadoFuturo =  Boat_h;
+								o_carBarrier = on;
+								o_alert = off;
+								o_bridge_s = on;
+							 end
+					3'b101: begin
+								EstadoFuturo =  Alert;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = on;
+							  end
+					3'b110: begin
+								EstadoFuturo =  Boat_ch;
+								o_carBarrier = on;
+								o_alert = off;
+								o_bridge_s = on;
+							  end
+					3'b111: begin
+								EstadoFuturo =  Alert;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = on;
+							 end	
+			endcase
+			Boat_c_Cars: case({i_boatHere, i_boatClose, has_car_c})
+					3'b000: begin
+								EstadoFuturo =  Empty_Bridge; 
+								o_carBarrier = off;
+								o_alert = off;
+								o_bridge_s = off;
+							 end
+					3'b001: begin
+								EstadoFuturo =  Cars;
+								o_carBarrier = off;
+								o_alert = off;
+								o_bridge_s = off;
+							 end
+					3'b010: begin 
+								EstadoFuturo =  Boat_c;
+								o_carBarrier = on;
+								o_alert = off;
+								o_bridge_s = on;
+							 end
+					3'b011: begin
+								EstadoFuturo =  Boat_c_Cars;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = off;
+							 end
+					3'b100: begin
+								EstadoFuturo =  Boat_h;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = on;
+							 end
+					3'b101: begin
+								EstadoFuturo =  Alert;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = on;
+							 end
+					3'b111: begin
+								EstadoFuturo =  Alert;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = on;
+							 end		 		 
+				 endcase
+			Boat_h: case({i_boatHere, i_boatClose, has_car_c})
+					3'b000: begin
+								EstadoFuturo =  Empty_Bridge;
+								o_carBarrier = off;
+								o_alert = off;
+								o_bridge_s = off;
+							 end
+					3'b001: begin
+								EstadoFuturo =  Cars;
+								o_carBarrier = off;
+								o_alert = off;
+								o_bridge_s = off;
+							  end
+					3'b010: begin
+								EstadoFuturo =  Boat_c;
+								o_carBarrier = on;
+								o_alert = off;
+								o_bridge_s = on;
+							 end
+					3'b011: begin
+								EstadoFuturo =  Boat_c_Cars;
+								o_carBarrier = on;
+								o_alert = off;
+								o_bridge_s = off;
+							 end
+					3'b100: begin
+								EstadoFuturo =  Boat_h;
+								o_carBarrier = on;
+								o_alert = off;
+								o_bridge_s = on;
+							 end
+					3'b101: begin
+								EstadoFuturo =  Alert;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = on;
+							 end
+					3'b110: begin
+								EstadoFuturo =  Boat_ch;
+								o_carBarrier = on;
+								o_alert = off;
+								o_bridge_s = on;
+							 end
+					3'b111: begin
+								EstadoFuturo =  Alert;
+								o_carBarrier = on;
+								o_alert = on;
+								o_bridge_s = on;
+							 end		 		 
+				 endcase
+			Boat_ch: case({i_boatHere, i_boatClose, has_car_c})
 						3'b000: begin
-									EstadoFuturo =  Cars;
-									o_carBarrier = off;
-									o_alert = off;
-									o_bridge_s = off;
+									EstadoFuturo =  Alert;
+									o_carBarrier = on;
+									o_alert = on;
+									o_bridge_s = on;
 								 end
 						3'b001: begin
 									EstadoFuturo =  Cars;
@@ -87,15 +332,48 @@ module drawbridge(has_car_c, i_clk, i_reset, i_carIn, i_carOut, i_boatClose, i_b
 									o_alert = off;
 									o_bridge_s = off;
 								 end
-						3'b001: begin
-									EstadoFuturo =  Cars;
-									o_carBarrier = off;
+						3'b010: begin
+									EstadoFuturo =  Boat_c;
+									o_carBarrier = on;
 									o_alert = off;
+									o_bridge_s = on;
+								 end
+						3'b011: begin
+									EstadoFuturo =  Boat_c_Cars;
+									o_carBarrier = on;
+									o_alert = on;
 									o_bridge_s = off;
 								 end
+						3'b100: begin
+									EstadoFuturo =  Boat_h;
+									o_carBarrier = on;
+									o_alert = off;
+									o_bridge_s = on;
+								 end
+						3'b101: begin
+									EstadoFuturo =  Alert;
+									o_carBarrier = on;
+									o_alert = on;
+									o_bridge_s = on;
+								 end
+						3'b110: begin
+									EstadoFuturo =  Boat_ch;
+									o_carBarrier = on;
+									o_alert = off;
+									o_bridge_s = on;
+								 end
+						3'b111: begin
+									EstadoFuturo = Alert;
+									o_carBarrier = on;
+									o_alert = on;
+									o_bridge_s = on;
+								 end		 		 
 					 endcase
 			
+		
 		endcase
+		
+		machine_state = EstadoFuturo;
 	end
 	
 	
