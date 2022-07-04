@@ -88,7 +88,14 @@ module drawbridge_tb;
 		
 		// 2 cars leaving
 		i_carOut <= 1; #80
+		i_carOut <= 0; #30
+		
+		// 1 car in
+		i_carIn <= 1; #30
+		i_carIn <= 0;
+		i_carOut <= 1; #20
 		i_carOut <= 0; #20
+
 		
 		
 		

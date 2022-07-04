@@ -1,5 +1,5 @@
 Analysis & Synthesis report for drawbridge
-Sat Jul  2 16:19:01 2022
+Mon Jul  4 18:31:43 2022
 Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
@@ -47,7 +47,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Jul  2 16:19:01 2022       ;
+; Analysis & Synthesis Status        ; Successful - Mon Jul  4 18:31:43 2022       ;
 ; Quartus Prime Version              ; 21.1.0 Build 842 10/21/2021 SJ Lite Edition ;
 ; Revision Name                      ; drawbridge                                  ;
 ; Top-level Entity Name              ; drawbridge                                  ;
@@ -328,7 +328,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
-    Info: Processing started: Sat Jul  2 16:18:53 2022
+    Info: Processing started: Mon Jul  4 18:31:36 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off drawbridge -c drawbridge
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -351,9 +351,9 @@ Info (21057): Implemented 138 device resources after synthesis - the final resou
     Info (21059): Implemented 7 output pins
     Info (21061): Implemented 125 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 4774 megabytes
-    Info: Processing ended: Sat Jul  2 16:19:01 2022
-    Info: Elapsed time: 00:00:08
-    Info: Total CPU time (on all processors): 00:00:18
+    Info: Peak virtual memory: 4777 megabytes
+    Info: Processing ended: Mon Jul  4 18:31:43 2022
+    Info: Elapsed time: 00:00:07
+    Info: Total CPU time (on all processors): 00:00:17
 
 
